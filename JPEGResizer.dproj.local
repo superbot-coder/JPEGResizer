@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.909,=C:\Users\USER\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.183,C:\PROJECT+\T E S T\testResizeJPG\ResizeGPG.dproj=C:\Users\USER\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.582,C:\PROJECT+\T E S T\testResizeJPG\ResizeGPG.dproj=C:\PROJECT+\T E S T\testResizeJPG\ResizeJPG.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.512,C:\PROJECT+\T E S T\testResizeJPG\UFrmMain.pas=C:\Users\USER\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.989,C:\PROJECT+\T E S T\testResizeJPG\ResizeJPG.dproj=C:\PROJECT+\T E S T\testResizeJPG\JPEGResizer.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.654,=C:\Users\USER\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.512,C:\PROJECT+\T E S T\testResizeJPG\UFrmMain.dfm=C:\Users\USER\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.222,=C:\Users\USER\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.671,=C:\Users\USER\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.637,=C:\Users\USER\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.739,=C:\Users\USER\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

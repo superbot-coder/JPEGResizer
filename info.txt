@@ -1,0 +1,109 @@
+https://www.cyberforum.ru/delphi-beginners/thread2317398.html
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  bmp: TBItmap;
+  jpg: TJpegImage;
+  scale: Double;
+begin
+  if opendialog1.execute then
+  begin
+    jpg := TJpegImage.Create;
+    try
+      jpg.Loadfromfile( opendialog1.filename );
+      if jpg.Height > jpg.Width then 
+	    scale := 50 / jpg.Height
+      else 
+	    scale := 50 / jpg.Width;
+      bmp:= Tbitmap.Create;
+      try
+        {Create thumbnail bitmap, keep pictures aspect ratio}
+        bmp.Width := Round( jpg.Width * scale );
+        bmp.Height:= Round( jpg.Height * scale );
+        bmp.Canvas.StretchDraw( bmp.Canvas.Cliprect, jpg );
+        {Draw thumbnail as control}
+        Self.Canvas.Draw( 100, 10, bmp );
+        {Convert back to JPEG and save to file}
+        jpg.Assign( bmp );
+        jpg.SaveToFile(ChangeFileext( opendialog1.filename, '_thumb.JPG' ));
+      finally
+        bmp.free;
+      end;
+    finally
+      jpg.free;
+    end;
+  end;
+end;
+
+В результате изображение получится "гладким" или не очень?
+Используй юнит JPEG и TJPEGImage. У него есть свойство Scale, с помощью которого можно отмасштабировать изображение от 1-1 до 1-8 (уменьшить).
+
+{ 2. --------------------------------------------------------------------------------------}
+
+Procedure ReSizeJpeg(var jpg:TJpegImage; NewWidth,NewHeight:integer);
+var
+ bmp,sbmp:Tbitmap;
+begin
+ bmp:= Tbitmap.create;
+ 
+ bmp.assign(jpg);
+ sbmp := Tbitmap.create;
+ sbmp.width  := NewWidth;
+ sbmp.Height := NewHeight;
+ sbmp.pixelFormat := pf24bit;
+ SetStretchBltMode(sbmp.canvas.handle,4);
+ StretchBlt(sbmp.canvas.handle,0,0,NewWidth,NewHeight,bmp.canvas.handle,0,0,bmp.width,bmp.height,SRCCOPY);
+ 
+ jpg.assign(sbmp);
+ jpg.CompressionQuality := 90;
+ jpg.compress;
+ sbmp.free;
+ bmp.free;
+end;
+
+{ 3. -------------------------------------------------------------------------------------}
+
+var bmp: TBItmap;
+    jpg: TJpegImage;
+    scaleX,scaleY: Double; //масштаб
+begin
+jpg := TJpegImage.Create;
+jpg.Loadfromfile('1.jpg');
+scaleX:=100/500; //отношение новой ширины к старой
+scaleY:=50/500; //отношение новой высоты к старой
+bmp:= Tbitmap.Create;
+bmp.Width := Round( jpg.Width * scaleX );
+bmp.Height:= Round( jpg.Height * scaleY);
+bmp.Canvas.StretchDraw( bmp.Canvas.Cliprect, jpg );
+
+{ 4. -------------------------------------------------------------------------------------}
+
+https://it-blackcat.blogspot.com/2020/06/change-image-resolution-acceleration.html
+
+procedure ScaleJpeg(jpg: TJPEGImage; const NewWidth, NewHeight: Integer; 
+                    const StretchMode: Integer = COLORONCOLOR);
+var
+  bmp: Vcl.Graphics.TBitmap;
+  fScale: Double;
+  PrevPt: TPoint;
+  hBMP, hJPG: HDC;
+begin
+  fScale := Min(NewWidth / jpg.Width, NewHeight / jpg.Height);
+  bmp := Vcl.Graphics.TBitmap.Create;
+  try
+    bmp.SetSize(Round(jpg.Width * fScale), Round(jpg.Height * fScale));
+ 
+    hBMP := bmp.Canvas.GetFHandle;
+    hJPG := jpg.Canvas.GetFHandle;
+ 
+    GetBrushOrgEx(hBMP, PrevPt);
+    SetStretchBltMode(hBMP, StretchMode);
+    SetBrushOrgEx(hBMP, PrevPt.x, PrevPt.y, @PrevPt);
+    StretchBlt(hBMP, 0, 0, bmp.Width, bmp.Height, hJPG, 0, 0, jpg.Width, jpg.Height, SRCCOPY);
+    jpg.Assign(bmp);
+  finally
+    bmp.Free;
+  end;
+end;
+
+
