@@ -12,10 +12,8 @@ JPEG Picture Resizing Demonstration
 
 #### Статус проекта: релиз
 
-
-
 ![Screenshot](https://github.com/superbot-coder/JPEGResizer/blob/main/images/ScreenShot_01.PNG "")
-![Screenshot](https://github.com/superbot-coder/ShoppingBase/blob/main/images/ScreenShot_02.PNG "")
+![Screenshot](https://github.com/superbot-coder/JPEGResizer/blob/main/images/ScreenShot_02.PNG "")
 
 **Требования для компиляции и зависимости:**
 - RAD Studio Delphi 10.4 и выше
